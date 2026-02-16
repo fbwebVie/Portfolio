@@ -1,32 +1,26 @@
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import type { Lang } from "@/i18n/i18n";
 
-export const metadata = {
-  title: "FBWebVie — Веб-разработка в Вене",
-  description: "Современные сайты для бизнеса: дизайн, скорость, SEO.",
+const inter = Inter({
+  subsets: ["latin", "cyrillic"],
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+export const metadata: Metadata = {
+  title: "Портфолио | Веб-разработчик",
+  description: "Создаю современные сайты на Next.js, React, Tailwind CSS",
 };
-
-export async function generateStaticParams() {
-  return [{ lang: "ru" }];
-}
 
 export default function RootLayout({
   children,
-  params,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-  params: { lang: Lang };
-}) {
-  const lang = params.lang;
-
+}>) {
   return (
-    <html lang={lang}>
-      <body className="min-h-screen bg-black text-white antialiased">
-        <Navbar lang={lang} />
+    <html lang="ru" className="scroll-smooth">
+      <body className={`${inter.className} bg-white text-gray-900 antialiased`}>
         {children}
-        <Footer lang={lang} />
       </body>
     </html>
   );
