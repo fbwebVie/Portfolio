@@ -1,124 +1,95 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { getDict } from "@/i18n/dictionaries";
-import type { Lang } from "@/i18n/i18n";
+import { useEffect, useState } from "react";
+import { Lang, getDictionary } from "@/i18n/i18n";
+
+const shell =
+  "backdrop-blur-xl bg-black/40 border border-white/10 rounded-full shadow-[0_0_40px_rgba(255,255,255,0.08)]";
 
 export function Navbar({ lang }: { lang: Lang }) {
-  const d = getDict(lang);
-  const pathname = usePathname();
+  const dict = getDictionary(lang);
   const [open, setOpen] = useState(false);
 
-  // Aktive Route erkennen
-  const isActive = (href: string) =>
-    pathname === href || pathname.startsWith(href + "/");
+  useEffect(() => {
+    if (!open) return;
+    const onEsc = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onEsc);
+    return () => window.removeEventListener("keydown", onEsc);
+  }, [open]);
 
-  // Smart Language Switch (behält aktuelle Seite)
-  const switchLanguage = () => {
-    const segments = pathname.split("/");
-    segments[1] = lang === "en" ? "ru" : "en";
-    return segments.join("/");
-  };
-
-  const other = lang === "en" ? "ru" : "en";
+  const links = [
+    { href: "#services", label: dict.nav.services },
+    { href: "#cases", label: dict.nav.cases },
+    { href: "#why", label: dict.nav.why },
+    { href: "#contact", label: dict.nav.contact },
+  ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-zinc-950/80 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-        {/* Logo */}
-        <Link href={`/${lang}`} className="font-semibold tracking-tight">
-          fbwebvie
-          <span className="ml-2 rounded-full bg-[rgb(var(--accent))] px-2 py-1 text-xs text-white">
-            portfolio
-          </span>
-        </Link>
+    <>
+      <header className="fixed top-5 left-0 right-0 z-50">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex items-center justify-between">
+            <Link href={`/${lang}`} className={`px-4 py-3 ${shell} text-white text-sm font-semibold`}>
+              FBWebVie
+            </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-4 text-sm text-zinc-200">
-          <Link
-            href={`/${lang}`}
-            className={`px-3 py-2 rounded-xl transition ${
-              isActive(`/${lang}`)
-                ? "bg-[rgb(var(--accent))]/20 text-white"
-                : "hover:bg-white/5"
-            }`}
-          >
-            {d.nav.home}
-          </Link>
+            <nav className={`hidden md:flex items-center gap-1 px-2 py-2 ${shell}`}>
+              {links.map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className="px-4 py-2 rounded-full text-sm text-white/70 hover:text-white hover:bg-white/10 transition-all"
+                >
+                  {l.label}
+                </Link>
+              ))}
+              <Link
+                href="#contact"
+                className="ml-1 px-4 py-2 rounded-full text-sm font-medium bg-white text-black hover:bg-white/90 transition"
+              >
+                {dict.nav.contact}
+              </Link>
+            </nav>
 
-          <Link
-            href={`/${lang}#pricing`}
-            className="px-3 py-2 rounded-xl hover:bg-white/5 transition"
-          >
-            {d.nav.packages}
-          </Link>
+            <button
+              onClick={() => setOpen((v) => !v)}
+              className={`md:hidden px-4 py-3 ${shell} text-white/80`}
+              aria-label="Menu"
+            >
+              {open ? "✕" : "☰"}
+            </button>
+          </div>
+        </div>
+      </header>
 
-          <Link
-            href={`/${lang}/demos`}
-            className={`px-3 py-2 rounded-xl transition ${
-              isActive(`/${lang}/demos`)
-                ? "bg-[rgb(var(--accent))]/20 text-white"
-                : "hover:bg-white/5"
-            }`}
-          >
-            {d.nav.demos}
-          </Link>
-
-          <Link
-            href={`/${lang}/contact`}
-            className={`px-3 py-2 rounded-xl transition ${
-              isActive(`/${lang}/contact`)
-                ? "bg-[rgb(var(--accent))]/20 text-white"
-                : "hover:bg-white/5"
-            }`}
-          >
-            {d.nav.contact}
-          </Link>
-
-          {/* Language Switch */}
-          <Link
-            href={switchLanguage()}
-            className="ml-2 rounded-full border border-white/15 px-3 py-1 hover:border-[rgb(var(--accent))]/70 transition"
-          >
-            {other.toUpperCase()}
-          </Link>
-        </nav>
-
-        {/* Mobile Hamburger */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="md:hidden text-white text-xl"
-        >
-          ☰
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
       {open && (
-        <div className="md:hidden border-t border-white/10 bg-zinc-950 px-4 py-4 space-y-3 text-sm text-zinc-200">
-          <Link href={`/${lang}`} onClick={() => setOpen(false)}>
-            {d.nav.home}
-          </Link>
-
-          <Link href={`/${lang}#pricing`} onClick={() => setOpen(false)}>
-            {d.nav.packages}
-          </Link>
-
-          <Link href={`/${lang}/demos`} onClick={() => setOpen(false)}>
-            {d.nav.demos}
-          </Link>
-
-          <Link href={`/${lang}/contact`} onClick={() => setOpen(false)}>
-            {d.nav.contact}
-          </Link>
-
-          <Link href={switchLanguage()} onClick={() => setOpen(false)}>
-            {other.toUpperCase()}
-          </Link>
+        <div className="fixed inset-0 z-40 md:hidden">
+          <div
+            className="absolute inset-0 bg-black/70"
+            onClick={() => setOpen(false)}
+          />
+          <div className="absolute top-20 left-4 right-4 rounded-3xl border border-white/10 bg-black/90 backdrop-blur-xl p-3">
+            {links.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="block px-4 py-3 rounded-2xl text-white/80 hover:text-white hover:bg-white/10 transition"
+              >
+                {l.label}
+              </Link>
+            ))}
+            <Link
+              href="#contact"
+              onClick={() => setOpen(false)}
+              className="mt-2 block px-4 py-3 rounded-2xl bg-white text-black font-medium text-center"
+            >
+              {dict.nav.contact}
+            </Link>
+          </div>
         </div>
       )}
-    </header>
+    </>
   );
 }

@@ -1,36 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import type { Lang } from "@/i18n/i18n";
 
 export function NavLink({
-  lang,
-  label,
-  to,
+  href,
+  children,
 }: {
-  lang: Lang;
-  label: string;
-  to: "home" | "services" | "demos" | "trust" | "pricing" | "contact";
+  href: string;
+  children: React.ReactNode;
 }) {
-  const pathname = usePathname();
-  const isHome = pathname === `/${lang}`;
-
-  const href =
-    to === "home"
-      ? `/${lang}`
-      : to === "contact"
-      ? `/${lang}/contact`
-      : isHome
-      ? `#${to}`
-      : `/${lang}#${to}`;
-
   return (
     <Link
       href={href}
-      className="rounded-xl px-3 py-2 hover:bg-white/5 hover:text-white transition"
+      className="text-white/70 hover:text-white transition-colors text-sm"
     >
-      {label}
+      {children}
     </Link>
   );
 }

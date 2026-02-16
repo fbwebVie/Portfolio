@@ -1,6 +1,7 @@
-export const languages = ["en", "ru"] as const;
-export type Lang = (typeof languages)[number];
+import ru from "./dictionaries/ru";
 
-export function isLang(x: string): x is Lang {
-  return (languages as readonly string[]).includes(x);
+export type Lang = "ru";
+
+export function getDictionary(lang: Lang) {
+  return ru;
 }

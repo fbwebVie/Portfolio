@@ -1,22 +1,33 @@
 export type Demo = {
-  slug: string;
-  title: { en: string; ru: string };
-  description: { en: string; ru: string };
+  title: string;
+  subtitle: string;
   tags: string[];
-  href: string;
-  image: string;
+  result: string;
 };
 
 export const demos: Demo[] = [
   {
-    slug: "workshop",
-    title: { en: "Auto Workshop", ru: "Автосервис" },
-    description: {
-      en: "Service website with pricing, gallery, and contact CTA.",
-      ru: "Сайт услуг с ценами, галереей и CTA для заявки.",
-    },
-    tags: ["Business", "Next.js", "SEO"],
-    href: "https://example.netlify.app",
-    image: "/demos/workshop.png",
-  }
+    title: "Vienna Beauty Studio",
+    subtitle: "Салон красоты — сайт с онлайн-записью и сильной подачей услуг",
+    tags: ["Landing", "UX", "SEO"],
+    result: "+52% новых обращений за месяц",
+  },
+  {
+    title: "JuristWien",
+    subtitle: "Юридическая фирма — строгий корпоративный стиль и доверие",
+    tags: ["Corporate", "SEO", "Content"],
+    result: "+44% заявок через форму",
+  },
+  {
+    title: "Wiener Genuss",
+    subtitle: "Ресторан — меню, бронирование и быстрый мобильный опыт",
+    tags: ["Brand", "Mobile", "Performance"],
+    result: "+37% бронирований",
+  },
+  {
+    title: "Meister Auto Wien",
+    subtitle: "Автосервис — услуги, карта, быстрый контакт и WhatsApp-CTA",
+    tags: ["Local", "CTA", "Speed"],
+    result: "+30% обращений",
+  },
 ];
