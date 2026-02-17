@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Project } from "@/data/projects";
 
 export default function ProjectCard({ project }: { project: Project }) {
@@ -11,10 +12,16 @@ export default function ProjectCard({ project }: { project: Project }) {
       <div className="group border border-gray-200 rounded-2xl overflow-hidden hover:border-gray-400 transition-colors">
         <button
           onClick={() => setIsOpen(true)}
-          className="w-full aspect-video bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center relative overflow-hidden cursor-zoom-in"
+          className="w-full aspect-video relative overflow-hidden cursor-zoom-in bg-gray-100 block"
         >
-          <span className="text-4xl">🖥️</span>
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors flex items-center justify-center">
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+          />
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
             <span className="opacity-0 group-hover:opacity-100 transition-opacity text-xs bg-white/90 px-3 py-1.5 rounded-full text-gray-600">
               Нажми чтобы увеличить
             </span>
@@ -68,37 +75,26 @@ export default function ProjectCard({ project }: { project: Project }) {
           </button>
 
           <div
-            className="bg-white rounded-2xl overflow-hidden max-w-3xl w-full my-8 shadow-2xl"
+            className="bg-white rounded-2xl overflow-hidden max-w-4xl w-full my-8 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="p-6 border-b border-gray-100">
-              <h3 className="text-lg font-semibold">{project.title}</h3>
-              <p className="text-sm text-gray-400 mt-1">
-                Прокрутите вниз чтобы увидеть весь сайт
-              </p>
+            <div className="p-6 border-b border-gray-100 flex justify-between items-center">
+              <div>
+                <h3 className="text-lg font-semibold">{project.title}</h3>
+                <p className="text-sm text-gray-400 mt-1">
+                  Прокрутите вниз чтобы увидеть весь сайт
+                </p>
+              </div>
             </div>
 
             <div className="overflow-y-auto max-h-[70vh]">
-              <div className="bg-gradient-to-b from-gray-50 to-gray-200 p-10 space-y-8">
-                <div className="h-40 bg-white rounded-xl shadow-sm flex items-center justify-center text-gray-300">
-                  Шапка сайта
-                </div>
-                <div className="h-60 bg-white rounded-xl shadow-sm flex items-center justify-center text-gray-300">
-                  Hero секция
-                </div>
-                <div className="h-40 bg-white rounded-xl shadow-sm flex items-center justify-center text-gray-300">
-                  О компании
-                </div>
-                <div className="h-48 bg-white rounded-xl shadow-sm flex items-center justify-center text-gray-300">
-                  Услуги
-                </div>
-                <div className="h-40 bg-white rounded-xl shadow-sm flex items-center justify-center text-gray-300">
-                  Контакты
-                </div>
-                <div className="h-20 bg-white rounded-xl shadow-sm flex items-center justify-center text-gray-300">
-                  Футер
-                </div>
-              </div>
+              <Image
+                src={project.image}
+                alt={project.title}
+                width={1200}
+                height={4000}
+                className="w-full h-auto"
+              />
             </div>
 
             <div className="p-6 border-t border-gray-100 flex gap-4">

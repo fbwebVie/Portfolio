@@ -15,9 +15,9 @@ export const projects: Project[] = [
     description:
       "Одностраничный сайт для барбершопа с секциями услуг, галереей работ, отзывами клиентов и формой записи. Адаптивный дизайн, плавные анимации.",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
-    image: "/images/projects/barbershop.jpg",
+    image: "/images/projects/demo-barbershop.png",
     liveUrl: "https://demo-barbershop-gules.vercel.app",
-    codeUrl: "https://github.com/taisfedotoff-2921/demo-barbershop",
+    codeUrl: "https://github.com/fedotovatais/demo-barbershop",
   },
   {
     id: 2,
