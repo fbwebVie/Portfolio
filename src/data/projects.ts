@@ -14,10 +14,10 @@ export const projects: Project[] = [
     title: "Лендинг для барбершопа",
     description:
       "Одностраничный сайт для барбершопа с секциями услуг, галереей работ, отзывами клиентов и формой записи. Адаптивный дизайн, плавные анимации.",
-    tags: ["Next.js", "Tailwind CSS"],
+    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     image: "/images/projects/barbershop.jpg",
-    liveUrl: "https://your-project.vercel.app",
-    codeUrl: "https://github.com/your-name/barbershop",
+    liveUrl: "https://demo-barbershop-gules.vercel.app",
+    codeUrl: "https://github.com/taisfedotoff-2921/demo-barbershop",
   },
   {
     id: 2,
