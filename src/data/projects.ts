@@ -24,10 +24,10 @@ export const projects: Project[] = [
     title: "Сайт-визитка фотографа",
     description:
       "Минималистичный сайт-портфолио для фотографа с галереей, лайтбоксом для просмотра фото, секцией «обо мне» и контактной формой.",
-    tags: ["Next.js", "Tailwind CSS"],
-    image: "/images/projects/photographer.jpg",
-    liveUrl: "https://your-project.vercel.app",
-    codeUrl: "https://github.com/your-name/photographer",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    image: "/images/projects/demo-photographer.png",
+    liveUrl: "https://demo-photographer-jet.vercel.app/",
+    codeUrl: "https://github.com/fedotovatais/demo-photographer",
   },
   {
     id: 3,
