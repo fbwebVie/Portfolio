@@ -33,10 +33,10 @@ export const projects: Project[] = [
     id: 3,
     title: "Лендинг для фитнес-студии",
     description:
-      "Промо-сайт фитнес-студии с расписанием занятий, описанием тренеров, прайс-листом и онлайн-записью. Тёмная стильная тема.",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
-    image: "/images/projects/fitness.jpg",
-    liveUrl: "https://your-project.vercel.app",
-    codeUrl: "https://github.com/your-name/fitness",
+      "Многостраничный сайт фитнес-студии с расписанием занятий, тарифами, командой тренеров, галереей и формой записи. Тёмная тема, яркие акценты.",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    image: "/images/projects/demo-fitness.png",
+    liveUrl: "https://demo-fitness-six.vercel.app/",
+    codeUrl: "https://github.com/fedotovatais/demo-fitness",
   },
 ];
